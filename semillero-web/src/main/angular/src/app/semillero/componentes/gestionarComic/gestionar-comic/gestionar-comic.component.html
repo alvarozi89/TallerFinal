@@ -1,0 +1,257 @@
+
+<div class="container">
+  
+    <pre>{{comicDTO | json}}</pre>
+    <pre>{{nombre | json}}</pre>
+
+    <form [formGroup]="gestionarComicForm">
+        <h1>Gestionar Comic</h1>
+        <hr>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="nombreComic">Nombre</label>
+                <input type="text" class="form-control" id="nombreComic"  maxlength="50"  formControlName="nombre"
+                [ngClass]="{'is-invalid':  submitted && f.nombre.errors }">
+                <div *ngIf="submitted && f.nombre.errors">
+                    <span class="text-danger" *ngIf="f.nombre.errors.required">Campo requerido</span>
+                    <span class="text-danger" *ngIf="f.nombre.errors.maxlength">El campo solo recibe 50 caracteres.</span>
+
+                </div>
+                
+
+            </div>
+
+            <div class="col-6">
+
+                <label for="editorialComic">Editorial</label>
+                <input type="text" class="form-control" id="editorial"  formControlName="editorial"
+                [ngClass]="{'is-invalid':  submitted && f.editorial.errors }">
+                <div *ngIf="submitted && f.editorial.errors">
+                    <span class="text-danger" *ngIf="f.editorial.errors.required">Campo requerido</span>
+                    <span class="text-danger" *ngIf="f.editorial.errors.maxlength">El campo solo recibe 50 caracteres.</span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="tematica">tematica</label>
+                    <select class="form-select" aria-label="Default select example" formControlName="tematica">
+                    <option value="AVENTURAS">AVENTURAS</option>
+                    <option value="BELICO">BELICO</option>
+                    <option value="DEPORTIVO">DEPORTIVO</option>
+                    <option value="FANTASTICO">FANTASTICO</option>
+                    <option value="CIENCIA_FICCION">CIENCIA FICCION</option>
+                    <option value="HORROR">HORROR</option>
+                </select>
+                </div>
+
+            
+            </div>
+
+            <div class="col-6">
+                <label for="coleccion">coleccion</label>
+                 <input type="text" class="form-control" id="coleccion"  formControlName="coleccion">
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="numeroPaginas">Número pagina</label>
+                <input type="number" class="form-control" id="numeroPaginas"  formControlName="numeroPaginas">
+            
+
+            </div>
+
+            <div class="col-6">
+
+                <label for="precio">precios</label>
+                <input type="number" class="form-control" id="precios"  formControlName="precio"
+                [ngClass]="{'is-invalid':  submitted && f.precio.errors }">
+                <div *ngIf="submitted && f.precio.errors">
+                    <span class="text-danger" *ngIf="f.precio.errors.required">Campo requerido</span>
+                    <span class="text-danger" *ngIf="f.precio.errors.maxlength">El campo solo recibe 50 caracteres.</span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-6">
+                <label for="autores">Autores:</label>
+               
+                <textarea class="form-control" id="autores" rows="3" formControlName="autores"></textarea>
+           
+            
+            </div>
+
+            <div class="col-6">
+
+                <label for="editorialComic">A color</label>
+                <br>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" class="custom-control-input"  value="true" formControlName="color">
+                     <label class="custom-control-label" for="customRadioInline1">si</label>
+
+                </div>
+
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" class="custom-control-input"  value="false" formControlName="color">
+                     <label class="custom-control-label" for="customRadioInline2">no</label>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-6">
+                <span></span>
+
+            </div>
+
+            <div class="col-6  text-right">
+                
+                    <button type="button" class="btn btn-primary" (click)="crearComic()">Crear/Editar</button>
+                    <button type="button" class="btn btn-primary" (click)="activarCampos()">Activar campos</button>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Tematica</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">A color</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Acciones</th>
+
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let comic of listaComics;let i=index;">
+                            <th scope="row">{{comic.id}}</th>
+                           
+                          
+                            <td>{{comic.nombre | uppercase}}</td>
+                            <td>{{comic.tematicaEnum | lowercase}}</td>
+                            <td>{{comic.precio | number:'.2'}}</td>
+                            <td>{{comic.color ? 'si':'no'}}</td>
+                            <td>{{comic.cantidad}}</td>
+                            <td>
+                                <!-- <i class="fas fa-search 2x ml-1" (click)="consultarComic(i)" title="Consultar"></i>
+                                <i class="fas fa-search 2x ml-1"  [routerLink]="['/bienvenida', comic]" title="editar"></i>
+                                <i class="fas fa-times-circle 2x ml-1" (click)="eliminarComic(i)"title="Eliminar"></i> -->
+
+                                <i class="fas fa-search 2x ml-1" (click)="consultarComic(i)" title="Consultar"></i>
+                                <!--<i class="fas fa-pencil-alt 2x ml-1"  [routerLink]="['/bienvenida', comic]" title="Editar"></i>-->
+                                <i class="fas fa-pencil-alt 2x ml-1"  (click)="irAComponenteCompra(comic)" title="Editar"></i>
+                                <i class="far fa-times-circle 2x ml-1" title="Eliminar"></i>
+                                <i  type="button" class="fas fa-dollar-sign 2x ml-1" data-toggle="modal" data-target="#modalModificar" (click)="ModificarComic(i)" title="Comprar"></i> 
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+         </div>
+
+            <div *ngIf="mostrarItem" class="alert alert-info" role="alert">
+                ITEM SELECCIONADO: <pre>{{ comicDTOInfo | json }}</pre> 
+                <button type="button" class="btn btn-primary" (click)="cerrar()">Cerrar</button>
+                
+               
+            </div>
+
+
+     
+        
+
+          <!-- Modal -->
+          <div *ngIf="mostrarModal" class="modal fade " id="modalModificar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modificar comic</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="nombreComicM">Nombre</label>
+                            <input type="text" class="form-control" id="nombreComicM"  maxlength="50" formControlName="nombre">
+                        
+            
+                        </div>
+            
+                   
+            
+            
+                    </div>
+            
+                   
+            
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="nombreComicM">Nueva cantidad</label>
+                            <input type="number" class="form-control" id="numeroPaginasM"  formControlName="cantidad">
+                        
+            
+                        </div>
+            
+            
+            
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="AlertaModificar()">Save changes</button>
+                </div>
+              </div>
+            </div>
+        </div>
+       
+
+              
+     
+
+
+
+
+    </form>
+
+</div>

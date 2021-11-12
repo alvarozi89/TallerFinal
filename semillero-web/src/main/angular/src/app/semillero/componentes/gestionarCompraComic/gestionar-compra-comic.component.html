@@ -1,0 +1,146 @@
+
+<div class="container">
+  
+    <pre>{{comicDTO | json}}</pre>
+    <pre>{{nombre | json}}</pre>
+
+    <form [formGroup]="gestionarComicForm">
+        <h1>Gestionar Compra Comic</h1>
+        <hr>
+
+      
+
+       
+
+        <div class="row">
+           
+
+            <div class="col-6">
+
+                <label for="precio">precios</label>
+                <input type="number" class="form-control" id="precios"  formControlName="precio"
+                [ngClass]="{'is-invalid':  submitted && f.precio.errors }">
+                <div *ngIf="submitted && f.precio.errors">
+                    <span class="text-danger" *ngIf="f.precio.errors.required">Campo requerido</span>
+                    <span class="text-danger" *ngIf="f.precio.errors.maxlength">El campo solo recibe 50 caracteres.</span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        
+
+        <div class="row">
+
+            <div class="col-6">
+                <span></span>
+
+            </div>
+
+            <div class="col-6  text-right">
+                
+                    <button type="button" class="btn btn-primary" (click)="crearComic()">Crear/Editar</button>
+                    <button type="button" class="btn btn-primary" (click)="activarCampos()">Activar campos</button>
+
+            </div>
+
+        </div>
+
+      
+          <!-- Modal -->
+          <!-- <div *ngIf="mostrarModal" class="modal fade " id="modalModificar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modificar comic</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="nombreComicM">Nombre</label>
+                            <input type="text" class="form-control" id="nombreComicM"  maxlength="50" name="nombreM" [(ngModel)]="comicDTOInfo.nombre">
+                        
+            
+                        </div>
+            
+                        <div class="col-6">
+            
+                            <label for="editorialM">Editorial</label>
+                            <input type="text" class="form-control" id="editorialM"  name="editorialM" [(ngModel)]="comicDTOInfo.editorial">
+                        
+            
+                        </div>
+            
+            
+                    </div>
+            
+                    <div class="row">
+            
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="tematica">tematica</label>
+                                <select class="form-select" aria-label="Default select example" name="tematicaEnumM" [(ngModel)]="comicDTOInfo.tematicaEnum">
+                                <option value="AVENTURAS">AVENTURAS</option>
+                                <option value="BELICO">BELICO</option>
+                                <option value="DEPORTIVO">DEPORTIVO</option>
+                                <option value="FANTASTICO">FANTASTICO</option>
+                                <option value="CIENCIA_FICCION">CIENCIA FICCION</option>
+                                <option value="HORROR">HORROR</option>
+                            </select>
+                            </div>
+            
+                        
+                        </div>
+            
+                        <div class="col-6">
+                            <label for="coleccionM">coleccion</label>
+                             <input type="text" class="form-control" id="coleccionM"  name="coleccionM" [(ngModel)]="comicDTOInfo.coleccion">
+                        </div>
+            
+            
+                    </div>
+            
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="nombreComicM">Número pagina</label>
+                            <input type="number" class="form-control" id="numeroPaginasM"  name="numeroPaginasM" [(ngModel)]="comicDTOInfo.numeroPaginas">
+                        
+            
+                        </div>
+            
+                        <div class="col-6">
+            
+                            <label for="preciosM">precios</label>
+                            <input type="number" class="form-control" id="preciosM"  name="precioM" [(ngModel)]="comicDTOInfo.precio">
+                        
+            
+                        </div>
+            
+            
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="AlertaModificar()">Save changes</button>
+                </div>
+              </div>
+            </div>
+        </div> -->
+       
+
+              
+     
+
+
+
+
+    </form>
+
+</div>
